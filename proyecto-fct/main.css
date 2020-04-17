@@ -1,0 +1,17 @@
+#caja-principal{
+    text-align: center;
+    margin-top: 10%;
+}
+
+.titulo {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.descripcion {
+    font-size: 18px;
+}
+
+#entrar{
+    margin-top: 5%;
+}
