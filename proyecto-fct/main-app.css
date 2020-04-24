@@ -1,3 +1,7 @@
+body{
+    background-color: rgb(255, 233, 224);
+}
+
 
 #contender-superior{
     width: 95%;
@@ -6,6 +10,7 @@
     border: 1px dashed black;
     margin: auto;
     margin-top: 1%;
+    background-color: rgb(196, 117, 85);
 
 }
 
@@ -17,6 +22,8 @@
         text-align: center;
         margin: auto;
         margin-top: -3%;
+        background-color: rgb(73, 39, 26);
+        color: white;
     }
 
     #titulo {
@@ -24,11 +31,12 @@
         font-weight: bold;
         text-align: right;
         margin-top: -2%;
+        color: white;
+
     }
 
 
     #estadisticas{
-        text-align: left;
         margin-top: -2%;
         margin-left: 3.5%;
         text-align: center;
@@ -49,6 +57,30 @@
         }
 
 
+    #tabla-recursos{
+        margin-left: 4.5%;
+        margin-top: 2%;
+        text-align: center;
+    }
+
+        table{
+            border: 1px solid black;
+        }
+
+        tr{
+            border: 1px solid black;
+
+        }
+
+        td{
+            border: 1px solid black;
+            width: 5em;
+            padding: 5px;
+
+        }
+      
+
+
     #avanzar-mes{
         border: 1px solid black;
         width: 12%;
@@ -58,11 +90,14 @@
         margin: auto;
         margin-top: -2%;
         cursor:pointer;
+        background-color: rgb(102, 56, 38);
+        color: white;
     }
 
         button {
             margin: 0 auto;
             display: block;
+            
         }
 
 
@@ -79,7 +114,7 @@
     #recursos{
         border: 1px solid black;
         width: 25%;
-        padding-bottom: 25%;
+        padding-bottom: 20%;
         margin: left;
         display: inline-block;
     }
@@ -140,13 +175,8 @@
     }
 
     #triangle-left {
-        width: 0;
-        height: 0;
-        border-top: 25px solid transparent;
-        border-right: 25px solid gray;
-        border-bottom: 25px solid transparent;
-
         margin: auto;
+        
         display: inline-block;
     }
 
@@ -162,12 +192,6 @@
     }
 
     #triangle-right {
-        width: 0;
-        height: 0;
-        border-top: 25px solid transparent;
-        border-left: 25px solid gray;
-        border-bottom: 25px solid transparent;
-
         margin: auto;
         display: inline-block;
     }
