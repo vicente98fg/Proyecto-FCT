@@ -5,9 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="main-app.css">
+
     <script src="main-app.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 </head>
 <body>
+
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="modal-title">Titulo</div>
+        <div id="modal-text">Texto</div>
+    </div>
+</div>
 
 <div id="contender-superior">
     <div id="tiempo"></div>
@@ -15,14 +26,14 @@
     <div id="estadisticas">
         <table>
             <tr>
-                <td>Estado</td>
-                <td>Poblacion</td>
-                <td>Trabajadores</td>
+                <td>Felicidad</td>
+                <td id="pobla">Poblacion</td>
+                <td id="work">Trabajadores</td>
             </tr>
             <tr>
-                <td>X</td>
-                <td>X</td>
-                <td>X</td>
+                <td>5%</td>
+                <td id="poblacion"></td>
+                <td id="workCant"></td>
         </table>
     </div>
     <button id="avanzar-mes">Siguiente Mes</button>
@@ -31,75 +42,769 @@
 
 
 <div id="contender-inferior">
-   
-    <div id="recursos">
-        <div id="subtitulo-1">Recursos</div>
-        <div id="tabla-recursos">
-            <table>
-                <tr>
-                    <td>Imagen</td>
-                    <td>Recurso</td>
-                    <td>Cantidad</td>
-                </tr>
-                <tr>
-                    <td>X</td>
-                    <td>X</td>
-                    <td>X</td>
-            </table>
-        </div>
 
-        
-    </div>
-
-
-    <div id="menu">
-        <div id="subtitulo-2">
+    <!--div id="nav">
         <ul>
             <li><button class="menu">Distribuir</button></li>
             <li><button class="menu">Investigar</button></li>
             <li>...</li>
         </ul>
+    </div -->
+
+
+    <nav>
+        <ul>
+          <li data-rel="1" class="active">Producción</li>
+          <li data-rel="2">Fabricación</li>
+          <li data-rel="3">Asignar</li>
+          <li data-rel="4">Investigación</li>
+          <li data-rel="5">Logros</li>
+        </ul>
+    </nav>
+
+   
+    <div id="recursos">
+        <div id="tabla-recursos">
+            <div>
+                <div>Recurso</div>
+                <div>Cantidad</div>
+            </div>
+            <div>
+                <div id="item">Comida Total</div>
+                <div id="cantComidaTotal">0</div>
+            </div>
+            <div>
+                <div id="item">Bayas y Frutas</div>
+                <div id="cantComida">0</div>
+            </div>
+            <div id="recurso-pesca">
+                <div id="item">Pescado</div>
+                <div id="cantPesca">0</div>
+            </div>
+            <div id="recurso-caza">
+                <div id="item">Carne</div>
+                <div id="cantCarne">0</div>
+            </div>
+            <div id="recurso-agricultura">
+                <div id="item">Agricultura</div>
+                <div id="cantAgricultura">0</div>
+            </div>
+            <div>
+                <div id="item">Madera</div>
+                <div id="cantMadera">0</div>
+            </div>
+            <div>
+                <div id="item">Piedra</div>
+                <div id="cantPiedra">0</div>
+            </div>
+            <div>
+                <div id="item">Arcilla</div>
+                <div id="cantArcilla">0</div>
+            </div>
+            <div id="recurso-ladrillo">
+                <div id="item">Ladrillos</div>
+                <div id="cantLadrillo">0</div>
+            </div>       
+            <div id="recurso-carbon">
+                <div id="item">Carbón</div>
+                <div id="cantCarbon">0</div>
+            </div>         
+            <div id="recurso-hierro">
+                <div id="item">Hierro</div>
+                <div id="cantHierro">0</div>
+            </div>
+            <div id="recurso-acero">
+                <div id="item">Acero</div>
+                <div id="cantAcero">0</div>
+            </div>
+            <div id="recurso-aceroImp">
+                <div id="item">Acero Imperial</div>
+                <div id="cantAceroImp">0</div>
+            </div>
+            <div id="recurso-caza">
+                <div id="item">Pieles</div>
+                <div id="cantCaza">0</div>
+            </div>
+            <div id="recurso-cuero">
+                <div id="item">Cuero</div>
+                <div id="cantCuero">0</div>
+            </div>
+            <div id="recurso-telaImp">
+                <div id="item">Tela Imperial</div>
+                <div id="cantTelaImp">0</div>
+            </div>
+            <div id="recurso-tools1">
+                <div id="item">Herramientas Básicas</div>
+                <div id="cantTools1">0</div>
+            </div>
+            <div id="recurso-tools2">
+                <div id="item">Herramientas de Hierro</div>
+                <div id="cantTools2">0</div>
+            </div>
+            <div id="recurso-tools3">
+                <div id="item">Herramientas de Acero</div>
+                <div id="cantTools3">0</div>
+            </div>
+            <div id="recurso-tools4">
+                <div id="item">Herramientas de Acero Imperial</div>
+                <div id="cantTools4">0</div>
+            </div>
+            <div id="recurso-toolPesca">
+                <div id="item">Cañas de Pescar</div>
+                <div id="cantToolPesca">0</div>
+            </div>
+            <div id="recurso-toolCaza">
+                <div id="item">Armas de Caza</div>
+                <div id="cantToolCaza">0</div>
+            </div>
+            <div id="recurso-ropa">
+                <div id="item">Ropajes</div>
+                <div id="cantRopa">0</div>
+            </div>
+            <div id="recurso-ropaImp">
+                <div id="item">Ropa Imperial</div>
+                <div id="cantRopaImp">0</div>
+            </div>
+            <div id="recurso-arch1">
+                <div id="item">Chozas</div>
+                <div id="cantArch1">0</div>
+            </div>
+            <div id="recurso-arch2">
+                <div id="item">Casas</div>
+                <div id="cantArch2">0</div>
+            </div>
+            <div id="recurso-taller">
+                <div id="item">Taller</div>
+                <div id="cantTaller">0</div>
+            </div>
+            <div id="recurso-castillo">
+                <div id="item">Castillo</div>
+                <div id="cantCastillo">0</div>
+            </div>
         </div>
 
-        <div id="cajas">
-            <div id="text">Texto</div>
-            <button id="triangle-left">-</button>
-            <div id="image"></div>
-            <button id="triangle-right">+</button>
+        
+    </div>
+
+    <div id="menu">
+
+        <section>
+            <article>
+
+        <div id="caja0">
+            <div id="text">Madera</div>
+            <button id="triangle-left-0">-</button>
+            <div id="image0" class="1">0</div>
+            <button id="triangle-right-0">+</button>
         </div>
         
-        <div id="cajas">
-            <div id="text">Texto</div>
-            <button id="triangle-left">-</button>
-            <div id="image"></div>
-            <button id="triangle-right">+</button>
+        <div id="caja1">
+            <div id="text">Piedra</div>
+            <button id="triangle-left-1">-</button>
+            <div id="image1" class="2">0</div>
+            <button id="triangle-right-1">+</button>
         </div>
 
-        <div id="cajas">
-            <div id="text">Texto</div>
-            <button id="triangle-left">-</button>
-            <div id="image"></div>
-            <button id="triangle-right">+</button>
+        <div id="caja2">
+            <div id="text">Arcilla</div>
+            <button id="triangle-left-2">-</button>
+            <div id="image2" class="3">0</div>
+            <button id="triangle-right-2">+</button>
         </div>
 
-        <div id="cajas">
-            <div id="text">Texto</div>
-            <button id="triangle-left">-</button>
-            <div id="image"></div>
-            <button id="triangle-right">+</button>
+        <div id="caja3">
+            <div id="text">Recolectar Comida</div>
+            <button id="triangle-left-3">-</button>
+            <div id="image3" class="4">0</div>
+            <button id="triangle-right-3">+</button>
         </div>
+
+        <div id="cajapesca">
+            <div id="text">Pescado</div>
+            <button id="triangle-left-pesca">-</button>
+            <div id="image6">0</div>
+            <button id="triangle-right-pesca">+</button>
+        </div>
+
+        <div id="cajacaza">
+            <div id="text">Caza</div>
+            <button id="triangle-left-caza">-</button>
+            <div id="image8">0</div>
+            <button id="triangle-right-caza">+</button>
+        </div>
+
+        <div id="cajaagricultura">
+            <div id="text">Agricultura</div>
+            <button id="triangle-left-agricultura">-</button>
+            <div id="image8">0</div>
+            <button id="triangle-right-agricultura">+</button>
+        </div>
+
+        <div id="cajacarbon">
+            <div id="text">Carbón</div>
+            <button id="triangle-left-carbon">-</button>
+            <div id="image8" class="2">0</div>
+            <button id="triangle-right-carbon">+</button>
+        </div>
+            </article>
+        </section>
+
+        <section>
+            <article>
+                <button id="cajaherramientas" class="collapsible">
+                    <div id="image-herramientas"></div>
+                    <div id="text-herramientas">
+                        Herramientas
+                        <br> <br>
+                    </div>
+                    <img id="triangle-closed0" src="triangle-closed.png">
+                    <img id="triangle-open0" src="triangle-open.png">
+                </button>
+
+                <div id="content0">
+                    <div id="cajatools1">
+                        <div id="text">Herramientas Básicas</div>
+                        <button id="triangle-left-tools1">-</button>
+                        <div id="image4">0</div>
+                        <button id="triangle-right-tools1">+</button>
+                        <div id="descripcion"><br><b>Requiere</b> 
+                            <br> Madera x1
+                            <br> Piedra x1
+                        </div>
+                    </div>
+                </div>
+
+
+                <button id="cajatelar" class="collapsible">
+                    <div id="image-telar"></div>
+                    <div id="text-telar">
+                        Telar
+                        <br> <br>
+                    </div>
+                    <img id="triangle-closed1" src="triangle-closed.png">
+                    <img id="triangle-open1" src="triangle-open.png">
+                </button>
+
+                <div id="content1">
+                    <div id="cajaladrillo">
+                        <div id="text">Ladrillos</div>
+                        <button id="triangle-left-ladrillo">-</button>
+                        <div id="image9">0</div>
+                        <button id="triangle-right-ladrillo">+</button>
+                        <div id="descripcion"><br><b>Requiere</b> 
+                            <br> Arcilla x2
+                            <br> Carbón x1
+                        </div>
+                    </div>
+                </div>
+
+                
+        
+
+
+                <div id="cajacuero">
+                    <div id="text">Cuero</div>
+                    <button id="triangle-left-cuero">-</button>
+                    <div id="image9">0</div>
+                    <button id="triangle-right-cuero">+</button>
+                    <div id="descripcion"><br><b>Requiere</b> 
+                        <br> Pieles x2
+                        <br> Carbón x1
+                    </div>
+                </div>
+
+                <div id="cajatelaImp">
+                    <div id="text">Tela Imperial</div>
+                    <button id="triangle-left-telaImp">-</button>
+                    <div id="image9">0</div>
+                    <button id="triangle-right-telaImp">+</button>
+                    <div id="descripcion"><br><b>Requiere</b> 
+                        <br> Cuero x2
+                        <br> Gema x1
+                    </div>
+                </div>
+
+                
+
+                <div id="cajahierro">
+                    <div id="text">Lingote de Hierro</div>
+                    <button id="triangle-left-hierro">-</button>
+                    <div id="image9">0</div>
+                    <button id="triangle-right-hierro">+</button>
+                    <div id="descripcion"><br><b>Requiere</b> 
+                        <br> Mena de Hierro x3
+                        <br> Carbón x1
+                    </div>
+                </div>
+
+                <div id="cajaacero">
+                    <div id="text">Lingote de Acero</div>
+                    <button id="triangle-left-acero">-</button>
+                    <div id="image9">0</div>
+                    <button id="triangle-right-acero">+</button>
+                    <div id="descripcion"><br><b>Requiere</b> 
+                        <br> Lingote Hierro x2
+                        <br> Carbón x2
+                    </div>
+                </div>
+
+                <div id="cajaaceroImp">
+                    <div id="text">Lingote de Acero Imperial</div>
+                    <button id="triangle-left-aceroImp">-</button>
+                    <div id="image9">0</div>
+                    <button id="triangle-right-aceroImp">+</button>
+                    <div id="descripcion"><br><b>Requiere</b> 
+                        <br> Lingote Acero x2
+                        <br> Gema x1
+                    </div>
+                </div>
+        
+                <div id="cajaarch1">
+                    <div id="text">Choza</div>
+                    <button id="triangle-left-arch1">-</button>
+                    <div id="image5">0</div>
+                    <button id="triangle-right-arch1">+</button>
+                    <div id="descripcion"><br><b>Requiere</b> 
+                        <br> Madera x4
+                        <br> Piedra x2
+                    </div>
+                </div>
+
+                <div id="cajaarch2">
+                    <div id="text">Casa</div>
+                    <button id="triangle-left-arch2">-</button>
+                    <div id="image5">0</div>
+                    <button id="triangle-right-arch2">+</button>
+                    <div id="descripcion"><br><b>Requiere</b> 
+                        <br> Madera x10
+                        <br> Piedra x5
+                        <br> Ladrillo x4
+                    </div>
+                </div>
+
+                <div id="cajataller">
+                    <div id="text">Taller</div>
+                    <button id="triangle-left-taller">-</button>
+                    <div id="image5">0</div>
+                    <button id="triangle-right-taller">+</button>
+                    <div id="descripcion"><br><b>Requiere</b> 
+                        <br> Madera x8
+                        <br> Ladrillo x3
+                        <br> Hierro x4
+                    </div>
+                </div>
+
+                <div id="cajacastillo">
+                    <div id="text">Castillo</div>
+                    <button id="triangle-left-castillo">-</button>
+                    <div id="image5">0</div>
+                    <button id="triangle-right-castillo">+</button>
+                    <div id="descripcion"><br><b>Requiere</b> 
+                        <br> Madera x50
+                        <br> Piedra x200
+                        <br> Acero Imperial x10
+                    </div>
+                </div>
+
+                
+
+                <div id="cajatools2">
+                    <div id="text">Herramientas de Hierro</div>
+                    <button id="triangle-left-tools2">-</button>
+                    <div id="image7">0</div>
+                    <button id="triangle-right-tools2">+</button>
+                    <div id="descripcion"><br><b>Requiere</b> 
+                        <br> Madera x2
+                        <br> Hierro x1
+                    </div>
+                </div>
+
+                <div id="cajatools3">
+                    <div id="text">Herramientas de Acero</div>
+                    <button id="triangle-left-tools3">-</button>
+                    <div id="image7">0</div>
+                    <button id="triangle-right-tools3">+</button>
+                    <div id="descripcion"><br><b>Requiere</b> 
+                        <br> Hierro x2
+                        <br> Acero x1
+                    </div>
+                </div>
+
+                <div id="cajatools4">
+                    <div id="text">Herramientas de Acero Imperial</div>
+                    <button id="triangle-left-tools4">-</button>
+                    <div id="image7">0</div>
+                    <button id="triangle-right-tools4">+</button>
+                    <div id="descripcion"><br><b>Requiere</b> 
+                        <br> Hierro x3
+                        <br> Acero Imperial x1
+                    </div>
+                </div>
+
+                <div id="cajatoolpesca">
+                    <div id="text">Caña de Pescar</div>
+                    <button id="triangle-left-toolpesca">-</button>
+                    <div id="image7">0</div>
+                    <button id="triangle-right-toolpesca">+</button>
+                    <div id="descripcion"><br><b>Requiere</b> 
+                        <br> Madera x2
+                    </div>
+                </div>
+
+                <div id="cajatoolcaza">
+                    <div id="text">Herramientas Caza</div>
+                    <button id="triangle-left-toolpesca">-</button>
+                    <div id="image7">0</div>
+                    <button id="triangle-right-toolpesca">+</button>
+                    <div id="descripcion"><br><b>Requiere</b> 
+                        <br> Madera x2
+                        <br> Piedra x2
+                    </div>
+                </div>
+
+                <div id="cajaropa">
+                    <div id="text">Ropajes</div>
+                    <button id="triangle-left-ropa">-</button>
+                    <div id="image7">0</div>
+                    <button id="triangle-right-ropa">+</button>
+                    <div id="descripcion"><br><b>Requiere</b> 
+                        <br> Cuero x2
+                    </div>
+                </div>
+
+                <div id="cajaropaImp">
+                    <div id="text">Ropa Imperial</div>
+                    <button id="triangle-left-ropaImp">-</button>
+                    <div id="image7">0</div>
+                    <button id="triangle-right-ropaImp">+</button>
+                    <div id="descripcion"><br><b>Requiere</b> 
+                        <br> Cuero x2
+                        <br> Tela Imperial x1
+                    </div>
+                </div>
+
+                <div id="cajaagricultura">
+                    <div id="text">Campo Cultivo</div>
+                    <button id="triangle-left-agricultura">-</button>
+                    <div id="image7">0</div>
+                    <button id="triangle-right-agricultura">+</button>
+                    <div id="descripcion"><br><b>Requiere</b> 
+                        <br> Madera x15
+                        <br> Hierro x2
+                    </div>
+                </div>
+            </article>
+        </section>
+
+
+        <section>
+            <article>
+                <div id="caja-asignar">
+                    <div id="text-asignar">Repartir Comida</div>
+                    <div id="recurso-asignar">Bayas y Frutas</div>
+                    <button id="less-asignar0">-</button>
+                    <div id="cantidad-asignar0"></div>
+                    <button id="more-asignar0">+</button>
+
+                    <br>
+
+                    <div id="comida-asignar-hidden">
+                        <div id="recurso-asignar">Pescado</div>
+                        <button id="less-asignar1">-</button>
+                        <div id="cantidad-asignar1"></div>
+                        <button id="more-asignar1">+</button>
+                    </div>
+                </div>
+
+                <div id="caja-asignar">
+                    <div id="text-asignar">Herramientas Básicas</div>
+                    <div id="recurso-asignar">Madera</div>
+                    <button id="lessTool-asignar0">-</button>
+                    <div id="cantidadTool-asignar0"></div>
+                    <button id="moreTool-asignar0">+</button>
+
+                    <br>
+
+                    <div id="recurso-asignar">Piedra</div>
+                    <button id="lessTool-asignar1">-</button>
+                    <div id="cantidadTool-asignar1"></div>
+                    <button id="moreTool-asignar1">+</button>
+
+                    <br>
+
+                    <div id="recurso-asignar">Arcilla</div>
+                    <button id="lessTool-asignar2">-</button>
+                    <div id="cantidadTool-asignar2"></div>
+                    <button id="moreTool-asignar2">+</button>
+                </div>
+            </article>
+        </section>
+
+    
+        <section>
+            <article>
+                <div id="caja0">
+                    <div id="text">Añadir <br> Investigador</div>
+                    <button id="triangle-left-inv">-</button>
+                    <div id="image">0</div>
+                    <button id="triangle-right-inv">+</button>
+                </div>
+
+                <div id="caja0">
+                    <div id="text-inv-blue">Puntos <br> Investigacion</div>
+                    <div id="image-inv-blue">0</div>
+                </div>
+
+                <div id="caja-inv-1">
+                    <div id="text-inv">Herramientas Artesanales</div>
+                    <div id="image-inv"></div>
+                    <div id="descripcion">
+                        <br>Aumentan ligeramente la producción de recursos.
+                        <br><br></div>
+                    <div id="coste">Requiere: 5 Puntos</div>
+                    <button id="research-1">Investigar</button>
+                </div>
+
+                <div id="caja-inv-5">
+                    <div id="text-inv">Herramientas de Hierro</div>
+                    <div id="image-inv"></div>
+                    <div id="descripcion">
+                        <br>Aumentan considerablemente la producción de recursos.
+                        <br><br></div>
+                    <div id="coste">Requiere: 10 Puntos</div>
+                    <button id="research-5">Investigar</button>
+                </div>
+
+                <div id="caja-inv-15">
+                    <div id="text-inv">Herramientas de Acero</div>
+                    <div id="image-inv"></div>
+                    <div id="descripcion">
+                        <br>Aumentan enormemente la producción de recursos.
+                        <br><br></div>
+                    <div id="coste">Requiere: 15 Puntos</div>
+                    <button id="research-6">Investigar</button>
+                </div>
+
+                <div id="caja-inv-16">
+                    <div id="text-inv">Herramientas de Acero Imperial</div>
+                    <div id="image-inv"></div>
+                    <div id="descripcion">
+                        <br>Aumentan masivamente la producción de recursos.
+                        <br><br></div>
+                    <div id="coste">Requiere: 20 Puntos</div>
+                    <button id="research-7">Investigar</button>
+                </div>
+
+                <div id="caja-inv-2">
+                    <div id="text-inv">Arquitectura Básica</div>
+                    <div id="image-inv"></div>
+                    <div id="descripcion">
+                        <br>Permite construir Chozas
+                        <br>Aumentan en 1 la poblacion
+                        <br><br></div>
+                    <div id="coste">Requiere: 5 Puntos</div>
+                    <button id="research-2">Investigar</button>
+                </div>
+
+                <div id="caja-inv-10">
+                    <div id="text-inv">Arquitectura Avanzada</div>
+                    <div id="image-inv"></div>
+                    <div id="descripcion">
+                        <br>Permite construir Casas
+                        <br>Aumentan en 4 la población
+                        <br><br></div>
+                    <div id="coste">Requiere: 12 Puntos</div>
+                    <button id="research-8">Investigar</button>
+                </div>
+
+                <div id="caja-inv-11">
+                    <div id="text-inv">Talleres</div>
+                    <div id="image-inv"></div>
+                    <div id="descripcion">
+                        <br>Permite construir Talleres
+                        <br>Aumentan en 1 los Trabajadores
+                        <br><br></div>
+                    <div id="coste">Requiere: 12 Puntos</div>
+                    <button id="research-9">Investigar</button>
+                </div>
+
+                <div id="caja-inv-17">
+                    <div id="text-inv">Castillo y Murallas</div>
+                    <div id="image-inv"></div>
+                    <div id="descripcion">
+                        <br>Permite construir el Castillo y Murallas
+                        <br>Aumentan enormemente la Felicidad
+                        <br><br></div>
+                    <div id="coste">Requiere: 25 Puntos</div>
+                    <button id="research-10">Investigar</button>
+                </div>
+
+                <div id="caja-inv-7">
+                    <div id="text-inv">Cuero y Ropajes Básicos</div>
+                    <div id="image-inv"></div>
+                    <div id="descripcion">
+                        <br>Permite tratar el Cuero
+                        <br>Tejer ropa aumenta ligeramente la Felicidad de la población
+                        <br><br></div>
+                    <div id="coste">Requiere: 10 Puntos</div>
+                    <button id="research-11">Investigar</button>
+                </div>
+
+                <div id="caja-inv-12">
+                    <div id="text-inv">Tela Imperial y Ropajes Avanzados</div>
+                    <div id="image-inv"></div>
+                    <div id="descripcion">
+                        <br>Permite tratar tejer Tela Imperial
+                        <br>Tejer ropa avanzada aumenta la Felicidad de la población
+                        <br><br></div>
+                    <div id="coste">Requiere: 15 Puntos</div>
+                    <button id="research-12">Investigar</button>
+                </div>
+
+                <div id="caja-inv-3">
+                    <div id="text-inv">Pesca</div>
+                    <div id="image-inv"></div>
+                    <div id="descripcion">
+                        <br>Desbloquea Cañas de Pescar
+                        <br>Aumenta la producción de comida
+                        <br><br></div>
+                    <div id="coste">Requiere: 8 Puntos</div>
+                    <button id="research-3">Investigar</button>
+                </div>
+
+                <div id="caja-inv-9">
+                    <div id="text-inv">Caza</div>
+                    <div id="image-inv"></div>
+                    <div id="descripcion">
+                        <br>Desbloquea Armas de Caza y Caceria
+                        <br>Aumenta la producción de comida
+                        <br><br></div>
+                    <div id="coste">Requiere: 8 Puntos</div>
+                    <button id="research-13">Investigar</button>
+                </div>
+
+                <div id="caja-inv-14">
+                    <div id="text-inv">Agricultura</div>
+                    <div id="image-inv"></div>
+                    <div id="descripcion">
+                        <br>Desbloquea los Cultivos
+                        <br>Aumenta la producción de comida
+                        <br><br></div>
+                    <div id="coste">Requiere: 15 Puntos</div>
+                    <button id="research-14">Investigar</button>
+                </div>
+
+                <div id="caja-inv-4">
+                    <div id="text-inv">Carbón y Ladrillos</div>
+                    <div id="image-inv"></div>
+                    <div id="descripcion">
+                        <br>Permite recolectar Carbón
+                        <br>Permite cocinar Arcilla
+                        <br><br></div>
+                    <div id="coste">Requiere: 8 Puntos</div>
+                    <button id="research-4">Investigar</button>
+                </div>
+
+                <div id="caja-inv-6">
+                    <div id="text-inv">Minería de Hierro</div>
+                    <div id="image-inv"></div>
+                    <div id="descripcion">
+                        <br>Permite recolectar Hierro
+                        <br>Permite hacer Lingotes de Hierro
+                        <br><br></div>
+                    <div id="coste">Requiere: 10 Puntos</div>
+                    <button id="research-15">Investigar</button>
+                </div>
+
+                <div id="caja-inv-8">
+                    <div id="text-inv">Fabricación de Acero</div>
+                    <div id="image-inv"></div>
+                    <div id="descripcion">
+                        <br>Permite fabricar Acero
+                        <br>Aumenta la probabilidad de conseguir Hierro
+                        <br><br></div>
+                    <div id="coste">Requiere: 12 Puntos</div>
+                    <button id="research-16">Investigar</button>
+                </div>
+
+                <div id="caja-inv-13">
+                    <div id="text-inv">Fabricación de Acero Imperial</div>
+                    <div id="image-inv"></div>
+                    <div id="descripcion">
+                        <br>Permite fabricar Acero Imperial
+                        <br>Posibilita la extracción de Gemas
+                        <br><br></div>
+                    <div id="coste">Requiere: 20 Puntos</div>
+                    <button id="research-17">Investigar</button>
+                </div>
+
+
+            </article>
+        </section>
+    
+        <section>
+            <article>
+                <div id="caja-logro">
+                    <div id="text-logro">El Comienzo</div>
+                    <div id="image-logro"></div>
+                    <div id="descripcion-logro">
+                       Construye tu primera Choza
+                       <br> <br>
+                    </div>
+                    <div id="logro-adquirido-0"></div>
+                </div>
+
+                <div id="caja-logro">
+                    <div id="text-logro">Cuidado con las astillas</div>
+                    <div id="image-logro"></div>
+                    <div id="descripcion-logro">
+                       Almacena 100 de Madera
+                       <br> <br>
+                    </div>
+                    <div id="logro-adquirido-1"></div>
+                </div>
+
+                <div id="caja-logro">
+                    <div id="text-logro">La buena cantera</div>
+                    <div id="image-logro"></div>
+                    <div id="descripcion-logro">
+                       Almacena 100 de Piedra
+                       <br> <br>
+                    </div>
+                    <div id="logro-adquirido-2"></div>
+                </div>
+
+                <div id="caja-logro">
+                    <div id="text-logro">Cocinando el futuro</div>
+                    <div id="image-logro"></div>
+                    <div id="descripcion-logro">
+                       Cocina Arcilla y fabrica un Ladrillo
+                       <br> <br>
+                    </div>
+                    <div id="logro-adquirido-3"></div>
+                </div>
+            </article>
+        </section>
 
 
     </div>
 
 
     <div id="info">
-        <div id="subtitulo-3">Informacion</div>
+
         
     </div>
 
 </div>
+ 
+<script>
+    (function($) {
+      $('nav li').click(function() {
+        $(this).addClass('active').siblings('li').removeClass('active');
+        $('section:nth-of-type('+$(this).data('rel')+')').stop().fadeIn(400, 'linear').siblings('section').stop().fadeOut(400, 'linear'); 
+      });
+    })(jQuery);
+</script>
 
-    
 </body>
 </html>
